@@ -69,7 +69,7 @@ module Rack
         end
 
         def process(method, path, headers = {}) #:nodoc:
-          env.merge!({ "REQUEST_METHOD" => method.to_s.upcase, "PATH_INFO" => path })
+          env.merge!(headers).merge!({ "REQUEST_METHOD" => method.to_s.upcase, "PATH_INFO" => path })
           self.request = Rack::Request.new(env)
           self.response = app.call(env)
         end

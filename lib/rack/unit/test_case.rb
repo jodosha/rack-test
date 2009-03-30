@@ -3,7 +3,7 @@ require 'test/unit'
 module Rack
   module Unit
     class TestCase < ::Test::Unit::TestCase
-      attr_reader   :app, :response
+      attr_reader   :response
       attr_accessor :request
 
       # Performs a GET request with the given path and headers.
@@ -64,6 +64,10 @@ module Rack
       end
 
       protected
+        def app
+          raise "Should be implemented by subclasses!"
+        end
+
         def process(method, path, headers = {}) #:nodoc:
           env.merge!({ "REQUEST_METHOD" => method.to_s.upcase, "PATH_INFO" => path })
           self.request = Rack::Request.new(env)

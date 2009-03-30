@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.homepage           = "http://lucaguidi.com"
   s.description        = "Test for Rack"
   s.has_rdoc           = true
-  s.files              = ["MIT-LICENSE", "README.rdoc", "Rakefile", "lib/rack/test.rb", "lib/rack/unit/test_case.rb", "rack-test.gemspec"]
-  s.extra_rdoc_files   = ['README.rdoc']
+  s.files              = ["MIT-LICENSE", "README.textile", "Rakefile", "lib/rack/test.rb", "lib/rack/unit/test_case.rb", "rack-test.gemspec"]
+  s.extra_rdoc_files   = ['README.textile']
 end

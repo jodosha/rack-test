@@ -6,17 +6,9 @@ module Rack
       attr_reader   :app, :response
       attr_accessor :request
 
-      def env #:nodoc:
-        @env ||= {}
-      end
-
       # Performs a GET request with the given path and headers.
       def get(path, headers = {})
         process :get, path, headers
-      end
-
-      def response=(response) #:nodoc:
-        @response = Rack::Response.new(response[2], response[0], response[1])
       end
 
       # Assert the status of the current response
@@ -60,13 +52,20 @@ module Rack
         assert_equal response.header["Location"], path, message
       end
 
+      def env #:nodoc:
+        @rack_env ||= { "rack.env" => "test", "REMOTE_ADDR" => "127.0.0.1" }
+      end
+
+      def response=(response) #:nodoc:
+        @response = Rack::Response.new(response[2], response[0], response[1])
+      end
+
       def default_test #:nodoc:
       end
 
       protected
         def process(method, path, headers = {}) #:nodoc:
-          env["REQUEST_METHOD"] = method.to_s.upcase
-          env["PATH_INFO"] = path
+          env.merge!({ "REQUEST_METHOD" => method.to_s.upcase, "PATH_INFO" => path })
           self.request = Rack::Request.new(env)
           self.response = app.call(env)
         end

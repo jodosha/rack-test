@@ -11,6 +11,26 @@ module Rack
         process :get, path, headers
       end
 
+      # Performs a POST request with the given path and headers.
+      def post(path, headers = {})
+        process :post, path, headers
+      end
+
+      # Performs a PUT request with the given path and headers.
+      def put(path, headers = {})
+        process :put, path, headers
+      end
+
+      # Performs a DELETE request with the given path and headers.
+      def delete(path, headers = {})
+        process :delete, path, headers
+      end
+
+      # Performs a HEAD request with the given path and headers.
+      def head(path, headers = {})
+        process :head, path, headers
+      end
+
       # Assert the status of the current response
       #
       # Example:
